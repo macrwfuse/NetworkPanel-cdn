@@ -26,13 +26,10 @@
                 </div>
             </transition>
             <transition name="el-fade-in">
-                <div v-if="!ipInfo.local && !ipInfo.cloudflare" v-loading="true">
-                    <el-tooltip class="item" effect="dark" content="" placement="top">
-                        <div>
-                            <el-text style="cursor: pointer;margin-left: 5px;white-space:nowrap;vertical-align: -1px;"
-                                class="font-background">正在加载...</el-text>
-                        </div>
-                    </el-tooltip>
+                <div v-if="!ipInfo.local && !ipInfo.cloudflare" class="loading-container">
+                    <el-icon class="is-loading" :size="14" style="vertical-align: -2px;"><Loading /></el-icon>
+                    <el-text style="margin-left: 5px;white-space:nowrap;vertical-align: -1px;"
+                        class="font-background">正在加载...</el-text>
                 </div>
             </transition> 
         </div>
@@ -80,7 +77,7 @@ const props = defineProps({
 import { reactive,ref, type Ref } from 'vue'
 import { ElMessage } from 'element-plus'
 import { toClipboard } from '@soerenmartius/vue3-clipboard'
-import { Search } from '@element-plus/icons-vue'
+import { Search, Loading } from '@element-plus/icons-vue'
 const queryWindow = ref(false)
 const isQuerying = ref(false)
 const ipInput = ref("")
@@ -207,6 +204,11 @@ watchCloudflare("cp.cloudflare.com")
 .font-background {
     color: #344357;
     font-size: 14px;
+}
+
+.loading-container {
+    display: inline-flex;
+    align-items: center;
 }
 
 .card {
