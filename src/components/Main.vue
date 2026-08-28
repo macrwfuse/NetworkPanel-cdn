@@ -304,6 +304,9 @@ scheduler.setCallbacks(
 
 const showMark = ref({ show: false })
 const customNodes = reactive(localStorage.customNodes ? JSON.parse(localStorage.customNodes) : [])
+// CDN 节点元数据缓存（用于多URL随机选取）
+const cdnNodeMeta: Record<string, { downloadUrls?: string[], uploadUrls?: string[], uploadUrl?: string, pingUrl?: string }> = {}
+
 const OnlineNodes: {
   label: string;
   options: {
@@ -321,9 +324,28 @@ for(let groupName in nodesJson) {
     }[];
   }={"label":groupName,options:[]}
   for(let node in group) {
-    temp.options.push({"value":group[node as keyof typeof group],"label":node})
+    const val = group[node as keyof typeof group]
+    if (typeof val === 'object' && val !== null && 'downloadUrls' in val) {
+      // 新格式：CDN 节点组，包含 downloadUrls 数组
+      const cdnNode = val as { downloadUrls: string[], uploadUrls?: string[], uploadUrl?: string, pingUrl?: string }
+      const firstUrl = cdnNode.downloadUrls[0] || ''
+      cdnNodeMeta[node] = cdnNode
+      temp.options.push({"value": firstUrl, "label": `${node} (${cdnNode.downloadUrls.length}源)`})
+    } else {
+      // 旧格式：直接 URL 字符串
+      temp.options.push({"value": val as string, "label": node})
+    }
   }
   OnlineNodes.push(temp)
+}
+
+// 从 CDN 节点组中随机选取一个下载 URL
+function resolveCdnUrl(nodeName: string): string {
+  const meta = cdnNodeMeta[nodeName]
+  if (meta && meta.downloadUrls && meta.downloadUrls.length > 0) {
+    return meta.downloadUrls[Math.floor(Math.random() * meta.downloadUrls.length)]
+  }
+  return ''
 }
 const nodes: Ref<{
   label: string;
@@ -444,7 +466,18 @@ const checkUrl = async (url: string) => {
 let solvedRunUrl = ''
 async function apiSolver(){
   if(!runUrl.value.startsWith("NetworkPanelApi://")){
-    solvedRunUrl = runUrl.value
+    // 检查是否是 CDN 节点组的标识符（在 cdnNodeMeta 中）
+    // 由于 runUrl 的 value 已经是第一个 URL，直接使用
+    // 但如果 runUrl 匹配某个 CDN 节点名，则随机选取
+    const nodeName = Object.keys(cdnNodeMeta).find(name => {
+      const meta = cdnNodeMeta[name]
+      return meta.downloadUrls && meta.downloadUrls.includes(runUrl.value)
+    })
+    if (nodeName) {
+      solvedRunUrl = resolveCdnUrl(nodeName)
+    } else {
+      solvedRunUrl = runUrl.value
+    }
     return
   }
   let host=runUrl.value.split("NetworkPanelApi://")[1]
