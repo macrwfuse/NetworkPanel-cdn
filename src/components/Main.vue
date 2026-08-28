@@ -323,6 +323,14 @@ for(let groupName in nodesJson) {
       label: string;
     }[];
   }={"label":groupName,options:[]}
+  // 兼容：分组本身就是 CDN 配置（顶层含 downloadUrls），此时分组名即节点名
+  if (typeof group === 'object' && group !== null && 'downloadUrls' in group) {
+    const cdnNode = group as { downloadUrls: string[], uploadUrls?: string[], uploadUrl?: string, pingUrl?: string }
+    cdnNodeMeta[groupName] = cdnNode
+    temp.options.push({"value": `cdn://${groupName}`, "label": `${groupName} (${cdnNode.downloadUrls.length}源)`})
+    OnlineNodes.push(temp)
+    continue
+  }
   for(let node in group) {
     const val = group[node as keyof typeof group]
     if (typeof val === 'object' && val !== null && 'downloadUrls' in val) {
@@ -414,7 +422,7 @@ onMounted(() => {
 })
 
 const tryStart = async () => {
-  if(runUrl.value.startsWith("NetworkPanelApi://")) {
+  if(runUrl.value.startsWith("NetworkPanelApi://") || runUrl.value.startsWith("cdn://")) {
     isRunning.value = true
     return
   }
@@ -466,18 +474,19 @@ const checkUrl = async (url: string) => {
 let solvedRunUrl = ''
 async function apiSolver(){
   if(!runUrl.value.startsWith("NetworkPanelApi://")){
-    // 检查是否是 CDN 节点组的标识符（在 cdnNodeMeta 中）
-    // 由于 runUrl 的 value 已经是第一个 URL，直接使用
-    // 但如果 runUrl 匹配某个 CDN 节点名，则随机选取
-    const nodeName = Object.keys(cdnNodeMeta).find(name => {
-      const meta = cdnNodeMeta[name]
-      return meta.downloadUrls && meta.downloadUrls.includes(runUrl.value)
-    })
-    if (nodeName) {
-      solvedRunUrl = resolveCdnUrl(nodeName)
-    } else {
-      solvedRunUrl = runUrl.value
+    // cdn:// 前缀：CDN 节点组标识符，随机选取一个下载 URL
+    if (runUrl.value.startsWith("cdn://")) {
+      const nodeName = runUrl.value.slice("cdn://".length)
+      const meta = cdnNodeMeta[nodeName]
+      if (meta && meta.downloadUrls && meta.downloadUrls.length > 0) {
+        solvedRunUrl = resolveCdnUrl(nodeName)
+      } else {
+        solvedRunUrl = runUrl.value
+      }
+      return
     }
+    // 普通 URL，直接使用
+    solvedRunUrl = runUrl.value
     return
   }
   let host=runUrl.value.split("NetworkPanelApi://")[1]
