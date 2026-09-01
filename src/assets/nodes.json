@@ -28,14 +28,14 @@
       "https://img.mcloud.139.com/material_prod/material_media/20221128/1669626861087.png"
     ],
     "uploadUrl": "https://speed.cloudflare.com/__up",
-    "pingUrl": "http://webcdn.m.qq.com"
+    "pingUrl": "/cdn-proxy/tencent"
   },
   "天翼云CDN": {
     "downloadUrls": [
       "https://desk.ctyun.cn:8999/desktop-prod/software/windows_tob_client/15/64/202030001/CtyunClouddeskUniversal_2.3.0_202030001_x86_20240327104015_Setup.exe"
     ],
     "uploadUrl": "https://speed.cloudflare.com/__up",
-    "pingUrl": "http://webcdn.m.qq.com"
+    "pingUrl": "/cdn-proxy/tencent"
   },
   "Speedo云CDN": {
     "downloadUrls": [
@@ -69,7 +69,7 @@
             "https://119.36.86.250:81/backend/empty.php?cors=1",
             "http://211.67.53.2/backend/empty.php?cors=1"
     ],
-    "pingUrl": "http://webcdn.m.qq.com"
+    "pingUrl": "/cdn-proxy/tencent"
   },
   "360云CDN": {
     "downloadUrls": [
@@ -84,13 +84,13 @@
             "http://bigsoftdlc.360tpcdn.com/auto/20201125/105005364_74cbde2c220e12dbd49b2c86e0ab2c6f.exe"
     ],
     "uploadUrl": "https://speed.cloudflare.com/__up",
-    "pingUrl": "http://webcdn.m.qq.com"
+    "pingUrl": "/cdn-proxy/tencent"
   },
   "腾讯云CDN": {
     "downloadUrls": [
-      "http://webcdn.m.qq.com/speed/SpeedTestData.dat"
+      "/cdn-proxy/tencent/speed/SpeedTestData.dat"
     ],
-    "uploadUrl": "http://netsp.master.qq.com/cgi-bin/netspeed",
-    "pingUrl": "http://webcdn.m.qq.com"
+    "uploadUrl": "/cdn-proxy/netsp/cgi-bin/netspeed",
+    "pingUrl": "/cdn-proxy/tencent"
   }
 }

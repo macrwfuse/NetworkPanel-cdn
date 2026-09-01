@@ -108,14 +108,30 @@ const copy = (ip: string) => {
 }
 
 async function queryIp(ip: string) {
-    const rsp = await fetch(import.meta.env.VITE_API_URL + "ip.ajax?ip=" + ip, {
+    // 优先使用 ipapi.co（免费、支持CORS）
+    const rsp = await fetch(`https://ipapi.co/${ip}/json/`, {
         method: "GET",
         mode: "cors",
         redirect: "follow",
         referrerPolicy: "no-referrer"
     });
     let resp = await rsp.json();
-    return resp['data']
+    if (resp.error) throw resp.reason || 'IP查询失败';
+    // 适配为原项目数据格式
+    return {
+        ip: resp.ip,
+        addr: [resp.city, resp.region, resp.country_name].filter(Boolean).join(' '),
+        country: { name: resp.country_name, code: resp.country_code },
+        registered_country: { name: resp.country_name, code: resp.country_code },
+        regions: [resp.region, resp.city].filter(Boolean),
+        regions_short: [resp.region, resp.city].filter(Boolean),
+        as: {
+            number: resp.asn,
+            name: resp.org,
+            info: resp.org
+        },
+        type: resp.network ? 'Network: ' + resp.network : ''
+    };
 }
 
 let failure = false
@@ -153,9 +169,12 @@ async function handleIP(ip: string) {
 (async function watchLocalIp() {
     if (props.isVisible) {
         try {
-            const response = await fetch(import.meta.env.VITE_API_URL + 'ip.ajax', { referrerPolicy: 'no-referrer' });
+            // 使用 ipapi.co 获取当前出口IP（支持CORS）
+            const response = await fetch('https://ipapi.co/json/', { referrerPolicy: 'no-referrer' });
             let resp = await response.json();
-            ipInfo.local = await handleIP(resp["data"]["ip"])
+            if (resp.ip) {
+                ipInfo.local = await handleIP(resp.ip)
+            }
         } catch (error) {
             console.log(error)
         }

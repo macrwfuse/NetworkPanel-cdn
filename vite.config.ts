@@ -75,6 +75,28 @@ export default defineConfig({
         target: 'http://localhost:3001',
         changeOrigin: true,
       },
+      // 腾讯CDN测速文件代理（解决CORS）
+      '/cdn-proxy/tencent': {
+        target: 'http://webcdn.m.qq.com',
+        changeOrigin: true,
+        rewrite: (path: string) => path.replace(/^\/cdn-proxy\/tencent/, ''),
+        configure: (proxy: any) => {
+          proxy.on('proxyRes', (proxyRes: any) => {
+            proxyRes.headers['access-control-allow-origin'] = '*';
+          });
+        },
+      },
+      // 腾讯测速上传接口代理
+      '/cdn-proxy/netsp': {
+        target: 'http://netsp.master.qq.com',
+        changeOrigin: true,
+        rewrite: (path: string) => path.replace(/^\/cdn-proxy\/netsp/, ''),
+        configure: (proxy: any) => {
+          proxy.on('proxyRes', (proxyRes: any) => {
+            proxyRes.headers['access-control-allow-origin'] = '*';
+          });
+        },
+      },
     },
   },
   base: './'
