@@ -16,7 +16,7 @@
     "CF 下载 1GB": "https://speed.cloudflare.com/__down?bytes=1000000000"
   },
   "CDN下载源[Download]": {
-    "字节CDN": "https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/jquery/3.6.0/jquery.min.js",
+    "字节CDN": "https://lf6-cdn-tos.bytegoofy.com/obj/douyin-pc-client/7044145585217083655/releases/8293088/1.0.8/win32-ia32/douyin-v1.0.8-win32-ia32-douyin.exe",
     "七牛CDN": "https://devtools.qiniu.com/linux/amd64/qrsctl",
     "阿里CDN": "https://gw.alipayobjects.com/os/volans-demo/93211a67-0eed-40ff-8a48-f6c137a88781/MiniProgramStudio-3.1.3.exe",
     "百度网盘": "https://issuepcdn.baidupcs.com/issue/netdisk/LinuxGuanjia/4.17.7/baidunetdisk_4.17.7_amd64.deb",
