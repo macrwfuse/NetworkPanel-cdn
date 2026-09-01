@@ -75,6 +75,11 @@ export default defineConfig({
         target: 'http://localhost:3001',
         changeOrigin: true,
       },
+      // 通用 CORS 代理（解决所有外部资源跨域）
+      '/cors-proxy': {
+        target: 'http://localhost:3001',
+        changeOrigin: true,
+      },
       // 腾讯CDN测速文件代理（解决CORS）
       '/cdn-proxy/tencent': {
         target: 'http://webcdn.m.qq.com',

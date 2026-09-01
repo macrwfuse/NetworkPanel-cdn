@@ -25,63 +25,62 @@
   },
   "和彩云CDN": {
     "downloadUrls": [
-      "https://img.mcloud.139.com/material_prod/material_media/20221128/1669626861087.png"
+      "/cors-proxy?url=https%3A%2F%2Fimg.mcloud.139.com%2Fmaterial_prod%2Fmaterial_media%2F20221128%2F1669626861087.png"
     ],
     "uploadUrl": "https://speed.cloudflare.com/__up",
     "pingUrl": "/cdn-proxy/tencent"
   },
   "天翼云CDN": {
     "downloadUrls": [
-      "https://desk.ctyun.cn:8999/desktop-prod/software/windows_tob_client/15/64/202030001/CtyunClouddeskUniversal_2.3.0_202030001_x86_20240327104015_Setup.exe"
+      "/cors-proxy?url=https%3A%2F%2Fdesk.ctyun.cn%3A8999%2Fdesktop-prod%2Fsoftware%2Fwindows_tob_client%2F15%2F64%2F202030001%2FCtyunClouddeskUniversal_2.3.0_202030001_x86_20240327104015_Setup.exe"
     ],
     "uploadUrl": "https://speed.cloudflare.com/__up",
     "pingUrl": "/cdn-proxy/tencent"
   },
   "Speedo云CDN": {
     "downloadUrls": [
-            "https://cdn.aixifan.com/downloads/AcfunLive-Setup-1.9.0.200-ReleaseX64_6d5c40.exe",
-            "https://devtools.qiniu.com/linux/amd64/qrsctl",
-            "https://devtools.qiniu.com/qdoractl-darwin-amd64-0.4.6",
-            "https://gw.alipayobjects.com/os/volans-demo/93211a67-0eed-40ff-8a48-f6c137a88781/MiniProgramStudio-3.1.3.exe",
-            "https://downapp.sina.cn/m/06/sinaNews_8.27.0_1719288606_4386_3538_armeabi-v7a.apk",
-            "https://i1.sinaimg.cn/edu/sinaopen/SinaOpencourse_V2.02.apk",
-            "https://statics.itc.cn/lt-app/sohumobile_official_gray_optimizeRelease_4_1.0.3_01161850.apk",
-            "https://open-image.ws.126.net/android_phone_release-sp_open-v9.9.9-v0a5b3c1dc0df472bb2fb057d0a5426c3.apk",
-            "https://lf3-cdn-tos.bytegoofy.com/obj/douyin-pc-client/7044145585217083655/releases/8293088/1.0.8/win32-ia32/douyin-v1.0.8-win32-ia32-douyin.exe",
-            "https://lf6-cdn-tos.bytegoofy.com/obj/douyin-pc-client/7044145585217083655/releases/8293088/1.0.8/win32-ia32/douyin-v1.0.8-win32-ia32-douyin.exe",
-            "https://wwwstatic.vivo.com.cn/vivoportal/files/download/app/20231026/350bda07c8a0719919bcadbf5aea3538.apk",
-            "https://cd.pddpic.com/android_dev/2023-11-08/a35eaee8e1f9f018cc40ace12931f7a2.apk",
-            "https://uu.gdl.netease.com/4112/UU-4.68.1.exe",
-            "https://cd.pddpic.com/android_dev/2024-06-26/06027b4121edcd1f106d992128a7124b.apk",
-            "https://cd.pddpic.com/volantis-open/volantis-common/app/com.xunmeng.workBench/Release_1834716.exe",
-            "https://cdn-ws.up366.cn/cn/files/setup/C72C242ED8400001EE2178A912E01146/2022/06/21/4dca83b3e1c461e070f75d2b485e75e7/up366-5.6.6.0.exe",
-            "https://open-image.ws.126.net/android_phone_release-sp_open-v9.10.1-vb7b79d6b531448baaca3a81e7fbdc13f.apk",
-            "https://lf3-package.vlabstatic.com/obj/faceu-packages/Jianying_split_4_8_0_10791_jianyingpro_0.exe",
-            "https://lf6-package.vlabstatic.com/obj/faceu-packages/Jianying_split_4_8_0_10791_jianyingpro_0.exe",
-            "https://lf9-package.vlabstatic.com/obj/faceu-packages/Jianying_split_4_8_0_10791_jianyingpro_0.exe",
-            "https://file.ljcdn.com/saas-pkg/asaas-new/new_asaas_4.0.56_win_prod.zip",
-            "https://video19.ifeng.com/video09/2022/07/06/p6950362006465552946-102-162611.mp4",
-            "https://download.jr.jd.com/downapp/jrapp_jr9631.apk"
+      "/cors-proxy?url=https%3A%2F%2Fcdn.aixifan.com%2Fdownloads%2FAcfunLive-Setup-1.9.0.200-ReleaseX64_6d5c40.exe",
+      "/cors-proxy?url=https%3A%2F%2Fdevtools.qiniu.com%2Flinux%2Famd64%2Fqrsctl",
+      "/cors-proxy?url=https%3A%2F%2Fgw.alipayobjects.com%2Fos%2Fvolans-demo%2F93211a67-0eed-40ff-8a48-f6c137a88781%2FMiniProgramStudio-3.1.3.exe",
+      "/cors-proxy?url=https%3A%2F%2Fdownapp.sina.cn%2Fm%2F06%2FsinaNews_8.27.0_1719288606_4386_3538_armeabi-v7a.apk",
+      "/cors-proxy?url=https%3A%2F%2Fi1.sinaimg.cn%2Fedu%2Fsinaopen%2FSinaOpencourse_V2.02.apk",
+      "/cors-proxy?url=https%3A%2F%2Fstatics.itc.cn%2Flt-app%2Fsohumobile_official_gray_optimizeRelease_4_1.0.3_01161850.apk",
+      "/cors-proxy?url=https%3A%2F%2Fopen-image.ws.126.net%2Fandroid_phone_release-sp_open-v9.9.9-v0a5b3c1dc0df472bb2fb057d0a5426c3.apk",
+      "/cors-proxy?url=https%3A%2F%2Flf3-cdn-tos.bytegoofy.com%2Fobj%2Fdouyin-pc-client%2F7044145585217083655%2Freleases%2F8293088%2F1.0.8%2Fwin32-ia32%2Fdouyin-v1.0.8-win32-ia32-douyin.exe",
+      "/cors-proxy?url=https%3A%2F%2Flf6-cdn-tos.bytegoofy.com%2Fobj%2Fdouyin-pc-client%2F7044145585217083655%2Freleases%2F8293088%2F1.0.8%2Fwin32-ia32%2Fdouyin-v1.0.8-win32-ia32-douyin.exe",
+      "/cors-proxy?url=https%3A%2F%2Fwwwstatic.vivo.com.cn%2Fvivoportal%2Ffiles%2Fdownload%2Fapp%2F20231026%2F350bda07c8a0719919bcadbf5aea3538.apk",
+      "/cors-proxy?url=https%3A%2F%2Fcd.pddpic.com%2Fandroid_dev%2F2023-11-08%2Fa35eaee8e1f9f018cc40ace12931f7a2.apk",
+      "/cors-proxy?url=https%3A%2F%2Fuu.gdl.netease.com%2F4112%2FUU-4.68.1.exe",
+      "/cors-proxy?url=https%3A%2F%2Fcd.pddpic.com%2Fandroid_dev%2F2024-06-26%2F06027b4121edcd1f106d992128a7124b.apk",
+      "/cors-proxy?url=https%3A%2F%2Fcd.pddpic.com%2Fvolantis-open%2Fvolantis-common%2Fapp%2Fcom.xunmeng.workBench%2FRelease_1834716.exe",
+      "/cors-proxy?url=https%3A%2F%2Fcdn-ws.up366.cn%2Fcn%2Ffiles%2Fsetup%2FC72C242ED8400001EE2178A912E01146%2F2022%2F06%2F21%2F4dca83b3e1c461e070f75d2b485e75e7%2Fup366-5.6.6.0.exe",
+      "/cors-proxy?url=https%3A%2F%2Fopen-image.ws.126.net%2Fandroid_phone_release-sp_open-v9.10.1-vb7b79d6b531448baaca3a81e7fbdc13f.apk",
+      "/cors-proxy?url=https%3A%2F%2Flf3-package.vlabstatic.com%2Fobj%2Ffaceu-packages%2FJianying_split_4_8_0_10791_jianyingpro_0.exe",
+      "/cors-proxy?url=https%3A%2F%2Flf6-package.vlabstatic.com%2Fobj%2Ffaceu-packages%2FJianying_split_4_8_0_10791_jianyingpro_0.exe",
+      "/cors-proxy?url=https%3A%2F%2Flf9-package.vlabstatic.com%2Fobj%2Ffaceu-packages%2FJianying_split_4_8_0_10791_jianyingpro_0.exe",
+      "/cors-proxy?url=https%3A%2F%2Ffile.ljcdn.com%2Fsaas-pkg%2Fasaas-new%2Fnew_asaas_4.0.56_win_prod.zip",
+      "/cors-proxy?url=https%3A%2F%2Fvideo19.ifeng.com%2Fvideo09%2F2022%2F07%2F06%2Fp6950362006465552946-102-162611.mp4",
+      "/cors-proxy?url=https%3A%2F%2Fdownload.jr.jd.com%2Fdownapp%2Fjrapp_jr9631.apk"
     ],
     "uploadUrls": [
-            "https://test.nju.edu.cn/backend/empty.php?cors=1",
-            "https://219.140.61.101/backend/empty.php?cors=1",
-            "https://119.36.86.250:81/backend/empty.php?cors=1",
-            "http://211.67.53.2/backend/empty.php?cors=1"
+      "https://test.nju.edu.cn/backend/empty.php?cors=1",
+      "https://219.140.61.101/backend/empty.php?cors=1",
+      "https://119.36.86.250:81/backend/empty.php?cors=1",
+      "http://211.67.53.2/backend/empty.php?cors=1"
     ],
     "pingUrl": "/cdn-proxy/tencent"
   },
   "360云CDN": {
     "downloadUrls": [
-            "https://cdn.qq.ime.sogou.com/QQPinyin_Setup_6.6.6304.400.exe",
-            "http://softdlc.360tpcdn.com/auto/20201130/2000000064_f07aefc3d918ebdafa9418f3f5ef5f9c.exe",
-            "https://dldir1.qq.com/qqtv/TencentVideo11.99.8523.0.exe",
-            "http://softdlc.360tpcdn.com/auto/20201127/23_21ed487ededbbb428b2a7dcecc969c7c.exe",
-            "https://download.cntv.cn/cbox/v6/ysyy_v6.0.3.3_1001_setup_x64.exe?spm=0.PF8WgFTOZypm.ETms2K8Lsimc.6&file=ysyy_v6.0.3.3_1001_setup_x64.exe",
-            "http://softdlc.360tpcdn.com/auto/20201127/100101123_879baf4f2d9d14f191be2443e16504af.exe",
-            "http://bigsoftdlc.360tpcdn.com/auto/20200826/104511_999095167454c21f770b31e8f080ebb7.exe",
-            "http://bigsoftdlc.360tpcdn.com/auto/20210401/103779382_99dafefbd4193095a95fa713348fe6e7.exe",
-            "http://bigsoftdlc.360tpcdn.com/auto/20201125/105005364_74cbde2c220e12dbd49b2c86e0ab2c6f.exe"
+      "/cors-proxy?url=https%3A%2F%2Fcdn.qq.ime.sogou.com%2FQQPinyin_Setup_6.6.6304.400.exe",
+      "/cors-proxy?url=http%3A%2F%2Fsoftdlc.360tpcdn.com%2Fauto%2F20201130%2F2000000064_f07aefc3d918ebdafa9418f3f5ef5f9c.exe",
+      "/cors-proxy?url=https%3A%2F%2Fdldir1.qq.com%2Fqqtv%2FTencentVideo11.99.8523.0.exe",
+      "/cors-proxy?url=http%3A%2F%2Fsoftdlc.360tpcdn.com%2Fauto%2F20201127%2F23_21ed487ededbbb428b2a7dcecc969c7c.exe",
+      "/cors-proxy?url=https%3A%2F%2Fdownload.cntv.cn%2Fcbox%2Fv6%2Fysyy_v6.0.3.3_1001_setup_x64.exe",
+      "/cors-proxy?url=http%3A%2F%2Fsoftdlc.360tpcdn.com%2Fauto%2F20201127%2F100101123_879baf4f2d9d14f191be2443e16504af.exe",
+      "/cors-proxy?url=http%3A%2F%2Fbigsoftdlc.360tpcdn.com%2Fauto%2F20200826%2F104511_999095167454c21f770b31e8f080ebb7.exe",
+      "/cors-proxy?url=http%3A%2F%2Fbigsoftdlc.360tpcdn.com%2Fauto%2F20210401%2F103779382_99dafefbd4193095a95fa713348fe6e7.exe",
+      "/cors-proxy?url=http%3A%2F%2Fbigsoftdlc.360tpcdn.com%2Fauto%2F20201125%2F105005364_74cbde2c220e12dbd49b2c86e0ab2c6f.exe"
     ],
     "uploadUrl": "https://speed.cloudflare.com/__up",
     "pingUrl": "/cdn-proxy/tencent"

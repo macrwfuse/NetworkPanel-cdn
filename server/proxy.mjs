@@ -68,7 +68,7 @@ function proxyRequest(targetUrl, method, headers, body) {
 const server = http.createServer(async (req, res) => {
   // CORS 头
   res.setHeader('Access-Control-Allow-Origin', '*')
-  res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS')
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS')
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type')
 
   if (req.method === 'OPTIONS') {
@@ -81,6 +81,83 @@ const server = http.createServer(async (req, res) => {
   if (req.url === '/health') {
     res.writeHead(200, { 'Content-Type': 'application/json' })
     res.end(JSON.stringify({ status: 'ok', timestamp: Date.now() }))
+    return
+  }
+
+  // 通用 CORS 代理：GET/POST /cors-proxy?url=<encoded_target_url>
+  // 解决浏览器跨域限制，透传目标资源
+  if (req.url.startsWith('/cors-proxy')) {
+    try {
+      const reqUrl = new URL(req.url, `http://localhost:${PORT}`)
+      const targetUrl = reqUrl.searchParams.get('url')
+
+      if (!targetUrl) {
+        res.writeHead(400, { 'Content-Type': 'application/json' })
+        res.end(JSON.stringify({ error: 'Missing url parameter' }))
+        return
+      }
+
+      // 收集请求体（POST 时）
+      let body = null
+      if (req.method === 'POST') {
+        const chunks = []
+        for await (const chunk of req) chunks.push(chunk)
+        body = Buffer.concat(chunks)
+      }
+
+      const url = new URL(targetUrl)
+      const options = {
+        hostname: url.hostname,
+        port: url.port || (url.protocol === 'https:' ? 443 : 80),
+        path: url.pathname + url.search,
+        method: req.method,
+        headers: {
+          'host': url.hostname,
+          'user-agent': req.headers['user-agent'] || 'Mozilla/5.0',
+          ...(req.headers.range ? { range: req.headers.range } : {}),
+          ...(req.headers['if-none-match'] ? { 'if-none-match': req.headers['if-none-match'] } : {}),
+        },
+      }
+
+      const transport = url.protocol === 'https:' ? https : http
+      const proxyReq = transport.request(options, (proxyRes) => {
+        // 透传目标响应头，强制加 CORS
+        const headers = { ...proxyRes.headers }
+        headers['access-control-allow-origin'] = '*'
+        headers['access-control-allow-methods'] = 'GET, POST, OPTIONS'
+        headers['access-control-allow-headers'] = '*'
+        delete headers['x-frame-options']
+        delete headers['content-security-policy']
+
+        res.writeHead(proxyRes.statusCode, headers)
+        proxyRes.pipe(res)
+      })
+
+      proxyReq.on('error', (err) => {
+        console.error('CORS proxy error:', err.message)
+        if (!res.headersSent) {
+          res.writeHead(502, { 'Content-Type': 'application/json' })
+          res.end(JSON.stringify({ error: err.message }))
+        }
+      })
+
+      proxyReq.setTimeout(60000, () => {
+        proxyReq.destroy()
+        if (!res.headersSent) {
+          res.writeHead(504, { 'Content-Type': 'application/json' })
+          res.end(JSON.stringify({ error: 'Gateway timeout' }))
+        }
+      })
+
+      if (body) proxyReq.write(body)
+      proxyReq.end()
+    } catch (err) {
+      console.error('CORS proxy error:', err.message)
+      if (!res.headersSent) {
+        res.writeHead(502, { 'Content-Type': 'application/json' })
+        res.end(JSON.stringify({ error: err.message }))
+      }
+    }
     return
   }
 
@@ -130,7 +207,8 @@ const server = http.createServer(async (req, res) => {
 })
 
 server.listen(PORT, '0.0.0.0', () => {
-  console.log(`🔔 Notification proxy running on http://0.0.0.0:${PORT}`)
-  console.log(`   Health: http://localhost:${PORT}/health`)
-  console.log(`   Proxy:  POST http://localhost:${PORT}/proxy?url=<target_webhook_url>`)
+  console.log(`🔔 Proxy server running on http://0.0.0.0:${PORT}`)
+  console.log(`   Health:     http://localhost:${PORT}/health`)
+  console.log(`   CORS Proxy: http://localhost:${PORT}/cors-proxy?url=<target_url>`)
+  console.log(`   Webhook:    POST http://localhost:${PORT}/proxy?url=<target_webhook_url>`)
 })
