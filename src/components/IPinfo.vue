@@ -108,29 +108,33 @@ const copy = (ip: string) => {
 }
 
 async function queryIp(ip: string) {
-    // 优先使用 ipapi.co（免费、支持CORS）
-    const rsp = await fetch(`https://ipapi.co/${ip}/json/`, {
+    // 使用 ipinfo.io（原生支持CORS，免费额度50k/月）
+    const rsp = await fetch(`https://ipinfo.io/${ip}/json`, {
         method: "GET",
         mode: "cors",
         redirect: "follow",
         referrerPolicy: "no-referrer"
     });
     let resp = await rsp.json();
-    if (resp.error) throw resp.reason || 'IP查询失败';
-    // 适配为原项目数据格式
+    if (resp.error) throw resp.error.message || 'IP查询失败';
+    // ipinfo.io 返回格式: { ip, city, region, country, loc, org, timezone, ... }
+    const org = resp.org || '';
+    const asnMatch = org.match(/^(AS\d+)/);
+    const asn = asnMatch ? asnMatch[1] : '';
+    const orgName = org.replace(/^AS\d+\s*/, '');
     return {
         ip: resp.ip,
-        addr: [resp.city, resp.region, resp.country_name].filter(Boolean).join(' '),
-        country: { name: resp.country_name, code: resp.country_code },
-        registered_country: { name: resp.country_name, code: resp.country_code },
+        addr: [resp.city, resp.region, resp.country].filter(Boolean).join(' '),
+        country: { name: resp.country, code: resp.country },
+        registered_country: { name: resp.country, code: resp.country },
         regions: [resp.region, resp.city].filter(Boolean),
         regions_short: [resp.region, resp.city].filter(Boolean),
         as: {
-            number: resp.asn,
-            name: resp.org,
-            info: resp.org
+            number: asn,
+            name: orgName,
+            info: orgName
         },
-        type: resp.network ? 'Network: ' + resp.network : ''
+        type: ''
     };
 }
 
@@ -169,8 +173,8 @@ async function handleIP(ip: string) {
 (async function watchLocalIp() {
     if (props.isVisible) {
         try {
-            // 使用 ipapi.co 获取当前出口IP（支持CORS）
-            const response = await fetch('https://ipapi.co/json/', { referrerPolicy: 'no-referrer' });
+            // 使用 ipinfo.io 获取当前出口IP（原生支持CORS）
+            const response = await fetch('https://ipinfo.io/json', { referrerPolicy: 'no-referrer' });
             let resp = await response.json();
             if (resp.ip) {
                 ipInfo.local = await handleIP(resp.ip)
